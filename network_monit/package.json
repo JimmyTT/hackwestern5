@@ -1,0 +1,24 @@
+{
+  "name": "network_monit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "network_monit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimmyTT/hackwestern5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimmyTT/hackwestern5/issues"
+  },
+  "homepage": "https://github.com/JimmyTT/hackwestern5#readme",
+  "dependencies": {
+    "node-nmap": "^4.0.0",
+    "npm-run": "^5.0.1",
+    "request": "^2.88.0"
+  }
+}
