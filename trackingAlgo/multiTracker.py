@@ -85,10 +85,21 @@ while cap.isOpened():
   if not success:
     break
   diff = cv2.absdiff(grey,grey1)
-  threshold = cv2.threshold(diff,SENSITIVITY_VALUE,255,cv2.THRESH_BINARY) 
+  succ, threshold = cv2.threshold(diff,SENSITIVITY_VALUE,255,cv2.THRESH_BINARY) 
   # get updated location of objects in subsequent frames
+  erodeElement = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3));
+    #dilate with larger element so make sure object is nicely visible
+  dilateElement = cv2.getStructuringElement(cv2.MORPH_RECT,(8,8));
+
+  cv2.erode(threshold,threshold,erodeElement)
+  cv2.erode(threshold,threshold,erodeElement)
+
+
+  cv2.dilate(threshold,threshold,dilateElement)
+  cv2.dilate(threshold,threshold,dilateElement)
+
   success, boxes = multiTracker.update(frame)
-  cv2.imshow('Thresholded Val', diff)
+  cv2.imshow('Thresholded Val', threshold)
   # draw tracked objects
   for i, newbox in enumerate(boxes):
     p1 = (int(newbox[0]), int(newbox[1]))
