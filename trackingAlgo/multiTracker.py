@@ -2,7 +2,8 @@ from __future__ import print_function
 import sys
 import cv2
 from random import randint
- 
+
+SENSITIVITY_VALUE = 20
 trackerTypes = ['BOOSTING', 'MIL', 'KCF','TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
  
 def createTrackerByName(trackerType):
@@ -34,7 +35,7 @@ def createTrackerByName(trackerType):
 
  
 # Create a video capture object to read videos
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(1)
  
 # Read first frame
 success, frame = cap.read()
@@ -49,18 +50,19 @@ colors = []
  
 # OpenCV's selectROI function doesn't work for selecting multiple objects in Python
 # So we will call this function in a loop till we are done selecting all objects
-while True:
+# while True:
+
   # draw bounding boxes over objects
   # selectROI's default behaviour is to draw box starting from the center
   # when fromCenter is set to false, you can draw box starting from top left corner
-  bbox = cv2.selectROI('MultiTracker', frame)
-  bboxes.append(bbox)
-  colors.append((randint(0, 255), randint(0, 255), randint(0, 255)))
-  print("Press q to quit selecting boxes and start tracking")
-  print("Press any other key to select next object")
-  k = cv2.waitKey(0) & 0xFF
-  if (k == 113):  # q is pressed
-    break
+bbox = cv2.selectROI('MultiTracker', frame)
+bboxes.append(bbox)
+colors.append((randint(0, 255), randint(0, 255), randint(0, 255)))
+print("Press q to quit selecting boxes and start tracking")
+print("Press any other key to select next object")
+  # k = cv2.waitKey(0) & 0xFF
+  # if (k == 113):  # q is pressed
+  #   break
  
 print('Selected bounding boxes {}'.format(bboxes))
 
@@ -77,12 +79,16 @@ for bbox in bboxes:
   # Process video and track objects
 while cap.isOpened():
   success, frame = cap.read()
+  grey = cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY)
+  success, frame1 = cap.read()
+  grey1 = cv2.cvtColor(frame1,cv2.COLOR_RGB2GRAY)
   if not success:
     break
-   
+  diff = cv2.absdiff(grey,grey1)
+  threshold = cv2.threshold(diff,SENSITIVITY_VALUE,255,cv2.THRESH_BINARY) 
   # get updated location of objects in subsequent frames
   success, boxes = multiTracker.update(frame)
- 
+  cv2.imshow('Thresholded Val', diff)
   # draw tracked objects
   for i, newbox in enumerate(boxes):
     p1 = (int(newbox[0]), int(newbox[1]))
