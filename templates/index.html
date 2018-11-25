@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Crowd Analyzer</title>
+    <link rel= "stylesheet" type = "text/css" href = "{{ url_for('static', filename='alertModal.css')}}">
 </head>
 <body>
     <div>
-        <button>Monitor</button>
-        <button>Get Alerts</button>
+        <a href = "/activityAnalysis"><button>Monitor</button></a>
+        <button id="myBtn">Get Alerts</button>
+        <!-- Alert Modal -->
+        <div id="myModal" class = "modal">
+            <!-- Modal content -->
+           <div class="modal-content">
+             <span class="close">&times;</span>
+             <h4>Enter your email to receive alerts about large volumes of activity.</h4>
+             <br/>
+             <input class="nice-textbox" type="text" placeholder="Email"/>
+           </div>
+        </div>
     </div>
+    <script src = "{{ url_for('static', filename='scripts.js')}}"></script>
 </body>
 </html>
