@@ -1,0 +1,69 @@
+@import '~@angular/material/theming';
+
+// Copy the palettes from your selected theme (usually theme.scss).
+$app-primary: mat-palette($mat-grey);
+$app-accent:  mat-palette($mat-light-blue);
+$app-warn:    mat-palette($mat-pink);
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat-color($app-primary);
+$accent: mat-color($app-accent);
+$warn: mat-color($app-warn);
+
+.tab-icon {
+    margin-right: 8px;
+}
+.inner-tab-with-margin {
+    margin: 15px;
+}
+::ng-deep .dashboard-container {
+    padding: 0px;
+}
+.iframe {
+    z-index: 20;
+    position: absolute;
+}
+.occupancy-card {
+    margin: 0px;
+    padding: 0;
+    width: 100%;
+    margin-left: 10px;
+}
+.occupancy-card-header {
+    background-color: #673ab7;
+    line-height: 36px;
+    text-align: center;
+}
+.occupancy-card-content {
+    padding: 10px;
+}
+.occupancy-header-text {
+    color: white;
+    margin-bottom: 0px !important;
+}
+.mat-light-text {
+    font-weight: 200;
+}
+.mat-slider-horizontal {
+    width: 300px;
+}
+.mat-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.mat-radio-button {
+    margin: 5px;
+}
+.email-input {
+    width: 100%;
+}
+.positive {
+    color: #4CAF50;
+}
+.negative {
+    color: #C62828;
+}
+.page-title {
+    margin-bottom: 0px;
+}

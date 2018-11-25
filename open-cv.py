@@ -14,7 +14,8 @@ def activityAnalysis():
     result = opencvService.triggerUpdate()
     netChange = opencvService.getNetChanges(result)
 
-    return render_template("activityAnalysis.html",netChange=netChange)
+    return jsonify({'netChange':netChange})
+    #return render_template("activityAnalysis.html",netChange=netChange)
 
 
 if __name__ == '__main__':
