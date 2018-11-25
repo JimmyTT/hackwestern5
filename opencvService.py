@@ -12,7 +12,7 @@ json_body = [
         "measurement": "BB",
         "time": current_time,
         "fields": {
-            "netChange": randint(1, 100),
+            "netChange": randint(-5, 5),
         }
     }
 ]
@@ -48,6 +48,6 @@ def triggerUpdate():
         triggerUpdate()
         time.sleep(5.0)
 '''
-print(getDateAndTime("", triggerUpdate()))
+# print(getDateAndTime("", triggerUpdate()))
 
 
